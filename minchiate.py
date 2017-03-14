@@ -3,6 +3,7 @@
 import ephem
 import datetime
 import icalendar
+import uuid
 
 START_DATE = datetime.datetime.utcnow()
 END_DATE = datetime.date(year=2030, month=12, day=31)
@@ -41,6 +42,9 @@ def main():
         event.add('summary', 'Minchiate tournament')
         event.add('dtstart', date)
         event.add('dtend', date + datetime.timedelta(days=2))
+        # Stupid compulsory boilerplate
+        event.add('dtstamp', datetime.datetime.utcnow())
+        event.add('uid', str(uuid.uuid4()))
         cal.add_component(event)
 
     with open("minchiate.ics", "wb") as f:
